@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <title>Administration of invoices</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:20px; word-wrap:break-word; }
+        a:link       { color:black;}
+        a:visited    { text-decoration: none; color:black;}
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Invoices Page</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="well">
+                <% invoices.forEach(function(invoice){ %>
+                    <p>
+                        <h3><hr><a href="/invoices/<%= invoice._id %>"><span class="fa fa-pencil-square-o"></span></a></h3>
+                        <strong>Date</strong>: <%= invoice.date %><br>
+                        <strong>Status</strong>: <%= invoice.status %><br>
+                        <strong>Scope of work</strong>: <%= invoice.scopeOfWork %><br>
+                        <strong>Price</strong>: <%= invoice.price %>
+                    </p>
+                  <% }); %>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <title>Administration of invoices</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:20px; word-wrap:break-word; }
+        a:link       { color:black;}
+        a:visited    { text-decoration: none; color:black;}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>		
+    <script type="text/javascript">
+        $(function(){				
+            $('#btn').click(function(e){
+                e.preventDefault();
+
+                var data = {};
+                data.scopeOfWork = $('[name = scopeOfWork]')[0].value;
+                data.status =  $('[name = status]')[0].value;
+                data.date =  $('[name = date]')[0].value;
+                data.price =  $('[name = price]')[0].value;
+                data._id =  $('[name = hidden]')[0].value;
+
+                $.ajax({
+                    type: 'PUT',
+                    data: data,
+                    dataType: 'application/json',
+                    url: '/endpoint',							
+                    success: function(data) {
+                       
+                    }
+                });
+            });				
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Invoices Card</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="well">
+                    <form action="/" method="POST">
+                        <input hidden value="<%= invoice._id %>" name="hidden">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="text" class="form-control" name="date" value="<%= invoice.date %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" name="status">
+                                <option selected value="<%= invoice.status %>">CREATED</option>
+                                <option selected value="<%= invoice.status %>">SENT</option>
+                                <option selected value="<%= invoice.status %>">PAID</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Scope Of Work</label>
+                            <input type="text" class="form-control" name="scopeOfWork" value="<%= invoice.scopeOfWork %>">
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="text" class="form-control" name="price" value="<%= invoice.price %>">
+                        </div>
+                
+                        <button id="btn" class="btn btn-warning btn-lg">Update</button>
+                    </form>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    <div class="text-center">
+        <a href="/invoices" class="btn btn-default"><span class="fa fa-bookmark"></span> View all invoices </a>
+    </div>
+
+</div>
+</body>
+</html>
